@@ -1,0 +1,91 @@
+{{- $architecture := or .architecture "arm64" -}}
+{{- $image := or .image "debian-pinephone-braveheart.img" -}}
+{{- $username := or .username "user" -}}
+{{- $kernel := or .kernel "5.5-pinephone" }}
+
+architecture: {{ $architecture }}
+
+actions:
+  - action: unpack
+    file: rootfs.tar.gz
+
+  - action: overlay
+    source: overlays/rootfs
+
+  - action: apt
+    description: Install phone-specific packages
+    packages:
+      - calls
+      - evince
+      - firmware-rtl8723cs
+      - gedit
+      - gnome-calculator
+      - gnome-clocks
+      - gnome-contacts
+      - gnome-control-center
+      - gnome-initial-setup
+      - gnome-software
+      - gnome-usage
+      - kgx
+      - phoc
+      - phosh
+      - plymouth-theme-pinephone
+      - powersupply
+      - purple-lurch
+      - purple-mm-sms
+      - purple-xmpp-http-upload
+      - telegram-purple
+
+  # This is needed for libwebkit2gtk
+  - action: run
+    description: Upgrade existing packages
+    chroot: true
+    command: yes | apt dist-upgrade
+
+  - action: run
+    description: Set up default user
+    chroot: true
+    script: scripts/setup-user.sh {{ $username }}
+
+  - action: run
+    description: Enable modem on startup
+    chroot: true
+    command: systemctl enable pinephone-modem.service
+
+  - action: image-partition
+    imagename: {{ $image }}
+    imagesize: 8GB
+    partitiontype: msdos
+    mountpoints:
+      - mountpoint: /
+        partition: rootfs
+    partitions:
+      - name: rootfs
+        fs: ext4
+        start: 1MB
+        end: 100%
+        flags: [ boot ]
+
+  - action: filesystem-deploy
+    description: Deploy filesystem onto image
+
+  - action: apt
+    description: Install kernel
+    packages:
+      - linux-image-{{ $kernel }}
+
+  - action: run
+    description: Cleanup filesystem
+    chroot: true
+    script: scripts/cleanup.sh
+
+  - action: raw
+    description: Install bootloader
+    origin: recipe
+    source: files/u-boot-sunxi-with-spl.bin
+    offset: 8192
+
+  - action: run
+    description: Create block map file
+    postprocess: true
+    command: bmaptool create {{ $image }} > {{ $image }}.bmap
