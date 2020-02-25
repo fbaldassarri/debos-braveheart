@@ -6,6 +6,7 @@ It's a fork of [Arnaud Ferraris' project: debos-pinephone](https://gitlab.com/a-
 # Main changes from Arnaud's version:
 
 - Based on GNU/Linux Debian 11 codename "Bullseye" (aka testing)
+- Updated /etc/apt/sources.list including bullseye-backports (main, contrib, non-free) and bullseye-security (main, contrib, non-free)
 - removed from image.yaml: gnome-2048, gnome-chess, chatty 
 - removed from rootfs.yaml: cheese [User applications], youtube-dl [User applications], lollypop [User applications], gnome-maps [User applications]
 - added to rootfs.yaml: nano [Console applications]
