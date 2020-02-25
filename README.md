@@ -3,6 +3,8 @@ A set of [debos](https://github.com/go-debos/debos) recipes to build a custom GN
 
 It's a fork of [Arnaud Ferraris' project: debos-pinephone](https://gitlab.com/a-wai/debos-pinephone).
 
+This different branch was born upon personal specific needs, but maybe could be useful for others. Any feedback, suggestion, bug report or help is welcome.
+
 # Main changes from Arnaud's version:
 
 - Based on GNU/Linux Debian 11 codename "Bullseye" (aka testing)
