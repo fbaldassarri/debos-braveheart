@@ -23,23 +23,23 @@ To build the image, you need to have `debos` and `bmaptool`. On a debian-based
 system, install these dependencies by typing the following command in a terminal:
 
 ```
-sudo apt install debos bmap-tools
+sudo apt-get install debos bmap-tools
 ```
 
-Then simply browse to the `debos-pinephone` folder and execute `./build.sh`.
+Then simply browse to the `debos-braveheart` folder and execute `./build.sh`.
 
 ## Install
 
 Insert a MicroSD card into your computer, and type the following command:
 
 ```
-sudo bmaptool copy debian-pinephone.img /dev/<sdcard>
+sudo bmaptool copy debian-pinephone-braveheart.img /dev/<sdcard>
 ```
 
 or:
 
 ```
-sudo dd if=debian-pinephone.img of=/dev/<sdcard> bs=1M
+sudo dd if=debian-pinephone-braveheart.img of=/dev/<sdcard> bs=1M
 ```
 
 *Note: Make sure to use your actual SD card device, such as `mmcblk0` instead of
