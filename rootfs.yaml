@@ -5,7 +5,7 @@ architecture: {{ $architecture }}
 
 actions:
   - action: debootstrap
-    suite: "bullseye"
+    suite: bullseye
     components:
       - main
       - contrib
@@ -19,28 +19,38 @@ actions:
     command: echo {{ $hostname }} > /etc/hostname
 
   - action: apt
+    recommends: false
     description: Install debian packages
     packages:
       # Base system
       - alsa-utils
+      - apt-utils
+      - busybox
       - ca-certificates
+      - console-data
+      - dbus-user-session
       - dconf-gsettings-backend
-      - desktop-base
       - dosfstools
-      - gstreamer1.0-nice
-      - gstreamer1.0-packagekit
+      - file
+      - hwdata
       - jitterentropy-rngd
       - kbd
       - locales
+      - man-db
       - mmc-utils
+      - patch
       - plymouth
+      - plymouth-label
       - python3-dbus
+      - rtkit
       - usb-modeswitch
       - usbutils
       - u-boot-tools
       - xdg-desktop-portal-gtk
       - xdg-user-dirs
       # System libraries
+      - libcanberra-gtk3-module
+      - libcanberra-pulse
       - libdbus-glib-1-2
       - libfarstream-0.2-5
       - libgadu3
@@ -51,8 +61,10 @@ actions:
       - libhandy-0.0-0
       - libmeanwhile1
       - libmxml1
-      - libnss-resolve
+      - libnss-myhostname
       - libnss-systemd
+      - libpam-cap
+      - libpam-gnome-keyring
       - libpam-systemd
       - libprotobuf-c1
       - libpurple0
@@ -63,21 +75,30 @@ actions:
       - libzephyr4
       # Console utilities
       - bash-completion
+      - bzip2
       - git
       - htop
+      - inxi
       - less
       - lsof
+      - nano
       - parted
       - psmisc
       - psutils
+      - rygel
       - sudo
       - vim
       - wget
-      - unzip
       - nano
+      - unzip
+      - xz-utils
       # Graphical software & utilities
-      - gdm3
+      - at-spi2-core
       - gir1.2-gtk-3.0
+      - gvfs
+      - gvfs-backends
+      - mesa-va-drivers
+      - mesa-vdpau-drivers
       - wayland-protocols
       - weston
       # Fonts
@@ -90,7 +111,6 @@ actions:
       # Network management
       - iw
       - mobile-broadband-provider-info
-      - modemmanager
       - net-tools
       - network-manager-gnome
       - rfkill
@@ -98,16 +118,27 @@ actions:
       # Network software
       - openssh-server
       - openssh-client
+      # Multimedia support
+      - ffmpeg
+      - gstreamer1.0-gl
+      - gstreamer1.0-nice
+      - gstreamer1.0-packagekit
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-plugins-good
+      - gstreamer1.0-pulseaudio
       # User applications
-      - epiphany-browser
+      - firefox-esr
       - gnome-bluetooth
       - gnome-calendar
       - gnome-online-accounts
       - gnome-session
       - gnome-settings-daemon
       - gnome-themes-extra-data
+      - nemo
       # Debug utilities
+      - dnsutils
       - inetutils-ping
+      - inetutils-traceroute
       - pciutils
 
   - action: pack

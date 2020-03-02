@@ -5,13 +5,24 @@ It's a fork of [Arnaud Ferraris' project: debos-pinephone](https://gitlab.com/a-
 
 This different branch was born upon personal specific needs, but maybe could be useful for others. Any feedback, suggestion, bug report or help is welcome.
 
-# Main changes from Arnaud's version:
+# Main Feature
 
+This image is
 - Based on GNU/Linux Debian 11 codename "Bullseye" (aka testing)
-- Updated /etc/apt/sources.list including bullseye-backports (main, contrib, non-free) and bullseye-security (main, contrib, non-free)
-- removed from image.yaml: gnome-2048, gnome-chess, chatty 
-- removed from rootfs.yaml: cheese [User applications], youtube-dl [User applications], lollypop [User applications], gnome-maps [User applications]
-- added to rootfs.yaml: nano [Console applications]
+- Include few useful command-line utilities: wget, nano
+
+# Changes from Arnaud's version:
+
+- [edited rootfs.yaml] changed target Debian OS from Sid (aka unstable) to "Bullseye" (aka testing) 
+- [edited rootfs.yaml] changed hostname from "pinephone" to "braveheart" as PINE64 will release different pinephone models
+- [edited setup-users.sh] changed the default root password to "toor"  
+- [added overlay] new file /etc/apt/sources.list including bullseye-backports (main, contrib, non-free) and bullseye-security (main, contrib, non-free) 
+- [removed image.yaml] removed packages: gnome-2048, gnome-chess, chatty, kgx
+- [removed rootfs.yaml] removed [User applications]: cheese, youtube-dl, lollypop, gnome-maps
+- [added rootfs.yaml] added [Console applications]: nano
+- [edited rootfs.yaml] replaced "Epiphany" web browser with "Firefox ESR" as default browser
+- [edited image.yaml] changed default username from "debian" to "user"
+- [added image.yaml] added packages: gnome-terminal
 
 # Default login
 The default user is `user` with password `1234`.
@@ -51,12 +62,9 @@ sudo dd if=debian-pinephone-braveheart.img of=/dev/<sdcard> bs=1M
 
 The generated image include, among others, the following packages:
 
-- [Epiphany](https://gitlab.gnome.org/GNOME/epiphany) web browser
-- [King's Cross](https://gitlab.gnome.org/ZanderBrown/kgx), a terminal emulator
 - [Clocks](https://source.puri.sm/Librem5/gnome-clocks) application
 - [Settings](https://source.puri.sm/Librem5/gnome-control-center) application
 - [Usage](https://source.puri.sm/Librem5/gnome-usage), a system monitor
 - [Squeekboard](https://gitlab.com/a-wai/squeekboard) virtual keyboard
 
 Please, check Arnaud Ferraris' [README.md](https://gitlab.com/a-wai/debos-pinephone/-/blob/master/README.md) about further details on packages built from upstream sources, on packages built from third-party-modified sources, on packages built from modified sources, what works and what doesn't. 
-
