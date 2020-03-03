@@ -1,7 +1,7 @@
 # debos-braveheart
 A set of [debos](https://github.com/go-debos/debos) recipes to build a custom GNU/Linux [Debian](https://www.debian.org) image for the [Pine64 PinePhone Braveheart](https://wiki.pine64.org/index.php/PinePhone).
 
-It's a fork of [Arnaud Ferraris' project: debos-pinephone](https://gitlab.com/a-wai/debos-pinephone).
+It's not a fork, in the real sense of term, but more a deep customization of [Arnaud Ferraris' project: debos-pinephone](https://gitlab.com/a-wai/debos-pinephone).
 
 This different branch was born upon personal specific needs, but maybe could be useful for others. Any feedback, suggestion, bug report or help is welcome.
 
